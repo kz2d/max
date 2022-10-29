@@ -21,7 +21,7 @@ do
 			echo "Quit: handler"
 			exit 0
 		;;
-		[0-9])
+		*)
 			case $command in
 				"+")
 					result=$(($result + $line))
@@ -32,11 +32,6 @@ do
 					echo $result
 				;;
 			esac
-		;;
-		*)
-			killall tail
-			echo "Error: handler"
-			exit 1
 		;;
 	esac
 done
