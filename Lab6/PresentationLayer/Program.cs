@@ -1,0 +1,2 @@
+﻿
+GlobalState.Start();
