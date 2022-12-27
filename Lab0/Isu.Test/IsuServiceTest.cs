@@ -1,14 +1,13 @@
-using IsuServiceTests.Interfaces;
-using IsuServiceTests.Services;
+using Isu.Interfaces;
+using Isu.Services;
 using NUnit.Framework;
 
 namespace Isu.Test;
-namespace IsuServiceTests;
 
 [TestFixture]
 public class IsuServiceTest
 {
-    private IIsuService _service = null!;
+    private IIsuService<IGroup, IStudent> _service = null!;
 
     [SetUp]
     public void SetUp()
