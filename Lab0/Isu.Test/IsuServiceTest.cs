@@ -3,6 +3,7 @@ using IsuServiceTests.Services;
 using NUnit.Framework;
 
 namespace Isu.Test;
+namespace IsuServiceTests;
 
 [TestFixture]
 public class IsuServiceTest
