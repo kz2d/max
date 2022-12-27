@@ -1,10 +1,12 @@
-namespace IsuServiceTests.Entyties;
+using Isu.Interfaces;
 
-public class Student
+namespace Isu.Entyties;
+
+public class Student : IStudent
 {
     private static int _nextId = 0;
 
-    public Student(Group group, string name)
+    public Student(IGroup group, string name)
     {
         Id = GetNextId();
         Group = group;
@@ -12,7 +14,7 @@ public class Student
     }
 
     public int Id { get; }
-    public Group Group { get; set; }
+    public IGroup Group { get; set; }
     public string Name { get; }
 
     private static int GetNextId()

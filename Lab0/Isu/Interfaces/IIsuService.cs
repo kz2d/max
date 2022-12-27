@@ -1,19 +1,20 @@
-using IsuServiceTests.Entyties;
+using Isu.Entyties;
 
-namespace IsuServiceTests.Interfaces;
+namespace Isu.Interfaces;
 
-public interface IIsuService
+public interface IIsuService<TG, TS>
+    where TG : IGroup
+    where TS : IStudent
 {
-    Group AddGroup(string name);
-    Student AddStudent(Group group, string name);
+    TG AddGroup(string name);
+    TS AddStudent(TG group, string name);
 
-    Student GetStudent(int id);
-    Student? FindStudent(int id);
-    List<Student> FindStudents(string groupName);
-    List<Student> FindStudents(int courseNumber);
+    TS? GetStudent(int id);
+    List<TS> FindStudents(string groupName);
+    List<TS> FindStudents(int courseNumber);
 
-    Group? FindGroup(string groupName);
-    List<Group> FindGroups(int courseNumber);
+    TG? FindGroup(string groupName);
+    List<TG> FindGroups(int courseNumber);
 
-    void ChangeStudentGroup(Student student, Group newGroup);
+    void ChangeStudentGroup(TS student, TG newGroup);
 }

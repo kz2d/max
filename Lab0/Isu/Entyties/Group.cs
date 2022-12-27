@@ -1,6 +1,8 @@
-namespace IsuServiceTests.Entyties;
+using Isu.Interfaces;
 
-public class Group
+namespace Isu.Entyties;
+
+public class Group : IGroup
 {
     public Group(string name) => Name = name;
     public string Name { get; }

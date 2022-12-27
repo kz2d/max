@@ -1,21 +1,21 @@
 using System.Diagnostics;
-using IsuServiceTests.Entyties;
-using IsuServiceTests.Interfaces;
+using Isu.Entyties;
+using Isu.Interfaces;
 
-namespace IsuServiceTests.Services;
+namespace Isu.Services;
 
-public class IsuService : IIsuService
+public class IsuService : IIsuService<IGroup, IStudent>
 {
-    private Dictionary<int, Student> _students;
-    private Dictionary<string, Group> _groups;
+    private Dictionary<int, IStudent> _students;
+    private Dictionary<string, IGroup> _groups;
 
     public IsuService()
     {
-        _students = new Dictionary<int, Student>();
-        _groups = new Dictionary<string, Group>();
+        _students = new Dictionary<int, IStudent>();
+        _groups = new Dictionary<string, IGroup>();
     }
 
-    public Group AddGroup(string name)
+    public IGroup AddGroup(string name)
     {
         if (_groups.ContainsKey(name))
         {
@@ -27,7 +27,7 @@ public class IsuService : IIsuService
         return group;
     }
 
-    public Student AddStudent(Group group, string name)
+    public IStudent AddStudent(IGroup group, string name)
     {
         if (_students.Count((x) => x.Value.Group.Name == group.Name) >= 10)
         {
@@ -39,7 +39,7 @@ public class IsuService : IIsuService
         return student;
     }
 
-    public Student GetStudent(int id)
+    public IStudent GetStudent(int id)
     {
         if (!_students.ContainsKey(id))
         {
@@ -49,12 +49,7 @@ public class IsuService : IIsuService
         return _students[id];
     }
 
-    public Student? FindStudent(int id)
-    {
-        return _students.ContainsKey(id) ? _students[id] : null;
-    }
-
-    public List<Student> FindStudents(string groupName)
+    public List<IStudent> FindStudents(string groupName)
     {
         if (!_groups.ContainsKey(groupName))
         {
@@ -64,10 +59,10 @@ public class IsuService : IIsuService
         return _students.Values.Where(s => s.Group.Name == groupName).ToList();
     }
 
-    public List<Student> FindStudents(int courseNumber)
+    public List<IStudent> FindStudents(int courseNumber)
     {
         var groups = FindGroups(courseNumber);
-        var students = new List<Student>();
+        var students = new List<IStudent>();
 
         foreach (var group in groups)
         {
@@ -77,17 +72,17 @@ public class IsuService : IIsuService
         return students;
     }
 
-    public Group? FindGroup(string groupName)
+    public IGroup? FindGroup(string groupName)
     {
         return _groups.ContainsKey(groupName) ? _groups[groupName] : null;
     }
 
-    public List<Group> FindGroups(int courseNumber)
+    public List<IGroup> FindGroups(int courseNumber)
     {
         return _groups.Values.Where(g => g.CourseNumber == courseNumber).ToList();
     }
 
-    public void ChangeStudentGroup(Student student, Group newGroup)
+    public void ChangeStudentGroup(IStudent student, IGroup newGroup)
     {
         if (!_students.ContainsKey(student.Id))
         {
