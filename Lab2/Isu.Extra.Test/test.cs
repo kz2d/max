@@ -1,6 +1,7 @@
 using Isu.Extra.Entities;
 using Isu.Extra.Interfaces;
 using Isu.Extra.Services;
+using Isu.Extra.Tools.Exceptions;
 using Xunit;
 using Stream = Isu.Extra.Entities.Stream;
 
@@ -24,7 +25,7 @@ public class IsuServiceTest
 
         var course1 = new Course("hi", m1);
         course1.AddStream(new Stream(course1, 2));
-        Assert.Throws<Exception>(() => service.RegisterStudent(student, course1.Streams[0]));
+        Assert.Throws<CourseExeprions>(() => service.RegisterStudent(student, course1.Streams[0]));
 
         var m2 = new Megafacultet("CиC");
         var course2 = new Course("hih", m2);
